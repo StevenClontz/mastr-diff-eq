@@ -5,6 +5,9 @@
     <me><%= ode %></me>
   </statement>
   <answer>
+    <% if has_complex_sol %>
+      <me><%= complex_sol %></me>
+    <% end %>
     <me><%= ode_sol %></me>
   </answer>
 </exercise>
