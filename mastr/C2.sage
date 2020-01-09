@@ -5,7 +5,8 @@ class C2(MastrExercise):
 
   def generate(self):
     t = var("t")
-    y = function("y")(t)
+    y = var("y2",latex_name="y")
+    yp = var("y1",latex_name="y'")
     
     # pick a for y'-ay
     a = randrange(1,6)*choice([-1,1])
@@ -24,6 +25,6 @@ class C2(MastrExercise):
     k = var("k")
    
     return {
-      "ode": "y'"+display_coeff(-a)+"y="+latex(part_sol.diff()-a*part_sol),
+      "ode": latex(yp-a*y==part_sol.diff()-a*part_sol),
       "ode_sol": "y="+latex(k*exp(a*t)+part_sol)
     }

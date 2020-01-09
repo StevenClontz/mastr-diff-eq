@@ -9,6 +9,7 @@ class D1(MastrExercise):
     kt^b
     ksin(bt)
     kcos(bt)
+    Plus one of the following:
     ke^{bt}+m*\delta(t-a)
     ke^{bt}+m*u(t-a)
     """
@@ -19,16 +20,17 @@ class D1(MastrExercise):
     k = choice([-1,1])*randrange(1,5)
     l = choice([-1,1])*randrange(1,5)
     a = randrange(1,4)
-    b = randrange(1,4)
+    b = randrange(2,4)
     transform = choice([
-      [k*t^b,k*factorial(b)/s^(b+1)],
-      [k*sin(b*t),k*b/(s^2+b^2)],
-      [k*cos(b*t),k*s/(s^2+b^2)],
-      [k*exp(b*t)+l*d(t-a),k/(s-b)+l*exp(-a*s)],
-      [k*exp(b*t)+l*u(t-a),k/(s-b)+l*exp(-a*s)/s],
+      [k*t^b+l*d(t-a),k*factorial(b)/s^(b+1)+l*exp(-a*s)],
+      [k*t^b+l*u(t-a),k*factorial(b)/s^(b+1)+l*exp(-a*s)/s],
+      [k*sin(b*t)+l*d(t-a),k*b/(s^2+b^2)+l*exp(-a*s)],
+      [k*sin(b*t)+l*u(t-a),k*b/(s^2+b^2)+l*exp(-a*s)/s],
+      [k*cos(b*t)+l*d(t-a),k*s/(s^2+b^2)+l*exp(-a*s)],
+      [k*cos(b*t)+l*u(t-a),k*s/(s^2+b^2)+l*exp(-a*s)/s],
     ])
  
     return {
-      "transform": "\\mathcal L\\left\\{"+latex(transform[0])+\
-        "\\right\\}="+latex(transform[1])
+      "pretransform": latex(transform[0]),
+      "transform": latex(transform[1])
     }

@@ -5,6 +5,8 @@ class F5(MastrExercise):
 
   def generate(self):
     t = var("t")
+    y = var("y2",latex_name="y")
+    yp = var("y1",latex_name="y'")
     
     # pick n for y=kx^n
     n = randrange(2,6)*choice([-1,1])
@@ -12,7 +14,7 @@ class F5(MastrExercise):
     t0 = choice([-1,1])
     # pick coefficient
     k = randrange(1,5)*choice([-1,1])
-    y = k*t^n
+    hom_sol = k*t^n
     # particular solution
     kp = randrange(1,6)*choice([-1,1])
     m = n
@@ -20,18 +22,25 @@ class F5(MastrExercise):
       m = randrange(1,5)*choice([-1,1])
     part_sol = choice([
       kp*t^m
-    ]) 
+    ])
+    ts = n*part_sol-t*part_sol.diff()
+    roll = randrange(0,4)
+    if roll==0:
+      ode = (ts+t*yp==n*y)
+    elif roll==1:
+      ode = (ts==-t*yp+n*y)
+    elif roll==2:
+      ode = (t*yp-n*y==-ts)
+    else:
+      ode = (n*y==t*yp+ts)
+    ivp_sol = (y==k*t^n+part_sol)
    
     return { 
       "ivp":
-        latex(n*part_sol-t*part_sol.diff())+
-        "+ty'="+
-        latex(n) +
-        "y \hspace{1em} y(" +
+        latex(ode)+
+        "\hspace{1em} y(" +
         latex(t0) +
         ") = " +
-        latex(y(t=t0)+part_sol(t=t0)),
-      "ivp_sol":
-        "y="+ latex(k) +"t^{"+latex(n) + "}" + 
-        display_coeff(kp) + latex(part_sol/kp)
+        latex(hom_sol(t=t0)+part_sol(t=t0)),
+      "ivp_sol": latex(ivp_sol)
     }
