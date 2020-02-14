@@ -33,6 +33,7 @@ class D2(MastrExercise):
       (y_0*s+yp_0)/(s^2+b^2)+k*exp(-a*s)/(s*(s^2+b^2)))
     ly_simp = "\\mathcal L\\left\\{y\\right\\}="+latex(\
       y_0*s/(s^2+b^2)+yp_0/(s^2+b^2)+m*exp(-a*s)/s-m*s*exp(-a*s)/(s^2+b^2))
+    partial_fractions = latex(1/(s^3+s*b^2)==(m/k)/s-(m*s/k)/(s^2+b^2))
     sol = latex(y==y_0*cos(b*t)+n*sin(b*t)+m*u(t-a)-m*cos(b*(t-a))*u(t-a))
  
     return {
@@ -40,7 +41,8 @@ class D2(MastrExercise):
       "ivs": ivs,
       "ly": ly,
       "ly_simp": ly_simp,
-      "sol": sol
+      "sol": sol,
+      "partial_fractions": partial_fractions
     }
 
   @classmethod
@@ -73,6 +75,7 @@ class D2(MastrExercise):
       (y_0*s+yp_0)/(s^2+b*s+c)+k*exp(-a*s)/(s^2+b*s+c))
     ly_simp = "\\mathcal L\\left\\{y\\right\\}="+latex(\
       beta/(s-m)-beta/(s-n)+exp(-a*s)*alpha/(s-m)-exp(-a*s)*alpha/(s-n))
+    partial_fractions = latex(1/(s^2+b*s+c)==(alpha/k)/(s-m)-(alpha/k)/(s-n))
     sol = latex(y==beta*exp(m*t)-beta*exp(n*t)+alpha*exp(m*(t-a))*u(t-a)\
       -alpha*exp(n*(t-a))*u(t-a))
  
@@ -81,7 +84,8 @@ class D2(MastrExercise):
       "ivs": ivs,
       "ly": ly,
       "ly_simp": ly_simp,
-      "sol": sol
+      "sol": sol,
+      "partial_fractions": partial_fractions
     }
 
   def generate(self):
